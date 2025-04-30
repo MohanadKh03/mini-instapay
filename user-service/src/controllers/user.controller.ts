@@ -35,7 +35,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 export async function profile(req: Request, res: Response, next: NextFunction) {
   try {
     const userId = req.params.userId;
-    const user = getUserById(userId);
+    const user = await getUserById(userId);
     if (!user)
       return sendUnifiedResponse(res, 404, 'User not found');
     sendUnifiedResponse(res, 200, 'User profile fetched', { id: user.id, username: user.username, email: user.email });

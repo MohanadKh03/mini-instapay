@@ -4,6 +4,8 @@ import cors from 'cors';
 import { logger } from './utils/logger';
 import userRoutes from './routes/user.routes';
 import { errorHandler } from './middlewares/error.handler.middleware';
+import mongoose from 'mongoose';
+
 
 dotenv.config();
 
@@ -27,3 +29,8 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`User service is running on port ${PORT}`);
 });
+
+mongoose.connect(process.env.MONGO_URI as string)
+    .then(() => logger.info('Connected to MongoDB'))
+    .catch(err => logger.error('Error connecting to MongoDB', err));
+
