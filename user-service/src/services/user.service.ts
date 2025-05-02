@@ -30,5 +30,21 @@ export async function loginUser(email: string, password: string) {
 }
 
 export async function getUserById(id: string) {
-  return await User.findOne({ id });
+  const user = await User.findOne({ id });
+  if (!user) throw new Error('User not found');
+  return user;
+}
+
+export async function getAllUsers() {
+  const users = await User.find();
+  return users.map(user => ({
+    id: user.id,
+    username: user.username,
+    email: user.email,
+    balance: user.balance
+  }));
+}
+
+export async function updateUser(id: string, updates: Partial<User>) {
+  return await User.findOneAndUpdate({ id }, updates, { new: true });
 }
