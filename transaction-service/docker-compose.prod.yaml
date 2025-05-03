@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  transaction-svc:
+    command: npm run start
+    ports:
+      - "3005:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://admin:admin@prod_mongo_transaction:27017
+    depends_on:
+      - prod-mongo-transaction
+    networks:
+        - prod-net
+
+  prod-mongo-transaction:
+    image: mongo
+    container_name: prod_mongo_transaction
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    networks:
+        - prod-net
+networks:
+  prod-net:
+    external: true
+    name: prod-shared-net

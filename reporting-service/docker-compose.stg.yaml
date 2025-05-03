@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  reporting-svc:
+    command: npm run start
+    ports:
+      - "3008:3001"
+    environment:
+      - PORT=3001
+      - TRANSACTION_SVC_NAME=transaction-service-transaction-svc-1:3001
+    networks:
+      - stg-net
+
+networks:
+  stg-net:
+    external: true
+    name: stg-shared-net
+

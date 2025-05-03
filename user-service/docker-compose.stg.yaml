@@ -2,26 +2,26 @@ version: '3.8'
 
 services:
   user-svc:
-    command: npm run start:dev
+    command: npm run start
     ports:
-      - "3001:3001"
+      - "3007:3001"
     environment:
       - PORT=3001
-      - MONGO_URI=mongodb://admin:admin@dev_mongo_user:27017
+      - MONGO_URI=mongodb://admin:admin@stg_mongo_user:27017
     depends_on:
-      - dev-mongo-user
+      - stg-mongo-user
     networks:
-        - dev-net
+        - stg-net
 
-  dev-mongo-user:
+  stg-mongo-user:
     image: mongo
-    container_name: dev_mongo_user
+    container_name: stg_mongo_user
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     networks:
-        - dev-net
+        - stg-net
 networks:
-  dev-net:
+  stg-net:
     external: true
-    name: dev-shared-net
+    name: stg-shared-net
