@@ -6,7 +6,7 @@ import axios from 'axios';
 export async function makeTransactionSummary(userId: string): Promise<TransactionSummaryReport> {
     logger.info(`Generating transaction summary for userId=${userId}`);
     try {
-        const transactions = (await axios.get(`http://localhost:3001/api/transactions/user/${userId}`)).data.data;
+        const transactions = (await axios.get(`http://${process.env.TRANSACTION_SVC_NAME}/api/transactions/user/${userId}`)).data.data;
         const totalTransactions = transactions.length;
         const totalAmount = transactions.reduce((acc: number, transaction: any) => acc + transaction.amount, 0);
         const averageAmount = totalTransactions > 0 ? totalAmount / totalTransactions : 0;
@@ -20,7 +20,7 @@ export async function makeTransactionSummary(userId: string): Promise<Transactio
         const totalToAmount = transactions
             .filter((transaction: any) => transaction.senderId !== userId)
             .reduce((acc: number, transaction: any) => acc + transaction.amount, 0);
-        
+
         const averageFromAmount = totalFromTransactions > 0 ? totalFromAmount / totalFromTransactions : 0;
         const averageToAmount = totalToTransactions > 0 ? totalToAmount / totalToTransactions : 0;
         const transactionCount = transactions.length;

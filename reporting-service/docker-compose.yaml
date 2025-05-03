@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  user-svc:
+  reporting-svc:
     build:
       context: .
       dockerfile: Dockerfile

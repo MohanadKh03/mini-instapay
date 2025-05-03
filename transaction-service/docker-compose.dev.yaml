@@ -1,21 +1,22 @@
 version: '3.8'
 
 services:
-  user-svc:
+  transaction-svc:
     command: npm run start:dev
     ports:
-      - "3001:3001"
+      - "3002:3001"
     environment:
       - PORT=3001
-      - MONGO_URI=mongodb://admin:admin@dev_mongo_app:27017
+      - MONGO_URI=mongodb://admin:admin@dev_mongo_transaction:27017
+      - USER_SVC_NAME=user-service-user-svc-1:3001
     depends_on:
-      - dev-mongo-user
+      - dev-mongo-transaction
     networks:
         - dev-net
 
-  dev-mongo-user:
+  dev-mongo-transaction:
     image: mongo
-    container_name: dev_mongo_app
+    container_name: dev_mongo_transaction
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
@@ -25,3 +26,4 @@ networks:
   dev-net:
     external: true
     name: dev-shared-net
+

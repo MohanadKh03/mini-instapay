@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  user-svc:
+  transaction-svc:
     build:
       context: .
       dockerfile: Dockerfile

@@ -34,9 +34,11 @@ export async function makeTransaction(
     }
 
     try {
-        const fromUser = (await axios.get(`http://localhost:3000/api/users/profile/${senderId}`)).data.data;
-        const toUser = (await axios.get(`http://localhost:3000/api/users/profile/${receiverId}`)).data.data;
+        logger.warn(`PROCESS: ${process.env.USER_SVC_NAME}`)
+        const fromUser = (await axios.get(`http://${process.env.USER_SVC_NAME}/api/users/profile/${senderId}`)).data.data;
+        const toUser = (await axios.get(`http://${process.env.USER_SVC_NAME}/api/users/profile/${receiverId}`)).data.data;
 
+        logger.warn("FROM USER: ", fromUser)
         if (!fromUser) {
             logger.warn(`User not found: senderId=${senderId}`);
             throw new Error('User not found');
@@ -56,8 +58,8 @@ export async function makeTransaction(
             throw new Error('Insufficient balance');
         }
 
-        await axios.put(`http://localhost:3000/api/users/update/${senderId}`, { balance: fromUser.balance - amount });
-        await axios.put(`http://localhost:3000/api/users/update/${receiverId}`, { balance: toUser.balance + amount });
+        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${senderId}`, { balance: fromUser.balance - amount });
+        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${receiverId}`, { balance: toUser.balance + amount });
         logger.info(`Balances updated successfully for senderId=${senderId} and receiverId=${receiverId}`);
 
         const transaction = await createTransaction(senderId, receiverId, amount);
