@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   reporting-svc:
+    image: reporting-service
     command: npm run start:dev
     ports:
       - "3003:3001"
