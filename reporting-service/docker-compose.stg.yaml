@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   reporting-svc:
+    image: reporting-service-stg
     command: npm run start
     ports:
       - "3008:3001"

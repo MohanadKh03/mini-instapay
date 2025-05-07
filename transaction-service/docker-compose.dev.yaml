@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   transaction-svc:
-    image: transaction-service
+    image: transaction-service-dev
     command: npm run start:dev
     ports:
       - "3002:3001"
