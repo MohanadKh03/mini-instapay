@@ -3,7 +3,6 @@ version: '3.8'
 services:
   user-svc:
     image: user-service-dev
-    command: npm run start:dev
     ports:
       - "3001:3001"
     environment:
