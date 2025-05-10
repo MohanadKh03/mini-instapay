@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: name
+  name: user-prod-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: user.local
+    - host: user.prod.local
       http:
         paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: user-service
+              name: user-prod-service
               port: 
-                number: 80
+                number: 90

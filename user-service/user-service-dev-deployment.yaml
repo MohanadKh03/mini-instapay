@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-deployment
+  name: user-service-dev-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: user-service
+      app: user-dev-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: user-dev-service
     spec:
       containers:
-        - name: user-service
+        - name: user-dev-service
           image: user-service-dev
-          imagePullPolicy: Never  # Change/remove if using a registry
+          imagePullPolicy: Never
           ports:
             - containerPort: 3001
+          workingDir: /app   
           env:
             - name: PORT
               value: "3001"
             - name: MONGO_URI
               value: mongodb://admin:admin@mongo-service:27017
-          command: ["npm", "run", "start:dev"  ]
+          command: ["npm", "run", "start:dev" ]

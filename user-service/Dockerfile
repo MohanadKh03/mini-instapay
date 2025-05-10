@@ -8,8 +8,12 @@ COPY src ./src/
 
 RUN npm install
 
-ENV PORT 3001
+ENV PORT=3001
+ENV NODE_ENV=development 
 
 EXPOSE 3001
 
-CMD ["npm","run","start:dev"]
+COPY entrypoint.sh ./
+RUN chmod +x entrypoint.sh
+
+CMD ["./entrypoint.sh"]
