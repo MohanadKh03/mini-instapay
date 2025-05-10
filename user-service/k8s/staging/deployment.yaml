@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-stg-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-stg-service
+  template:
+    metadata:
+      labels:
+        app: user-stg-service
+    spec:
+      containers:
+        - name: user-stg-service
+          image: user-service-dev
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3007
+          workingDir: /app   
+          env:
+            - name: PORT
+              value: "3007"
+            - name: MONGO_URI
+              value: mongodb://admin:admin@mongo-service:27017
+          command: ["npm", "run", "start" ]
