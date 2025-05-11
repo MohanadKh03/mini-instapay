@@ -22,4 +22,6 @@ spec:
           env:
             - name: PORT
               value: "3003"
+            - name: TRANSACTION_SVC_NAME
+              value: transaction-dev-service
           command: ["npm", "run", "start:dev" ]

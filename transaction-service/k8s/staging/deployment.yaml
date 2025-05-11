@@ -24,4 +24,6 @@ spec:
               value: "3008"
             - name: MONGO_URI
               value: mongodb://admin:admin@mongo-service:27017
+            - name: USER_SVC_NAME
+              value: user-dev-service
           command: ["npm", "run", "start" ]
