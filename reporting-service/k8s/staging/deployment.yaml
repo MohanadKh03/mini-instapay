@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reporting-service-stg-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reporting-stg-service
+  template:
+    metadata:
+      labels:
+        app: reporting-stg-service
+    spec:
+      containers:
+        - name: reporting-stg-service
+          image: reporting-service-dev
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3009
+          workingDir: /app   
+          env:
+            - name: PORT
+              value: "3009"
+          command: ["npm", "run", "start" ]

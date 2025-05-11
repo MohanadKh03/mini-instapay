@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reporting-service-dev-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reporting-dev-service
+  template:
+    metadata:
+      labels:
+        app: reporting-dev-service
+    spec:
+      containers:
+        - name: reporting-dev-service
+          image: reporting-service-dev
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3003
+          workingDir: /app   
+          env:
+            - name: PORT
+              value: "3003"
+          command: ["npm", "run", "start:dev" ]
