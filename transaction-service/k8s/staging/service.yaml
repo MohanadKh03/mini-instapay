@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: transaction-stg-service
+spec:
+  selector:
+    app: transaction-stg-service
+  ports:
+    - port: 130
+      targetPort: 3008

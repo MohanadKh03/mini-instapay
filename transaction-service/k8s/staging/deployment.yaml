@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-prod-deployment
+  name: transaction-service-stg-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-prod-service
+      app: transaction-stg-service
   template:
     metadata:
       labels:
-        app: user-prod-service
+        app: transaction-stg-service
     spec:
       containers:
-        - name: user-prod-service
-          image: user-service-dev
+        - name: transaction-stg-service
+          image: transaction-service-dev
           imagePullPolicy: Never
           ports:
-            - containerPort: 3004
+            - containerPort: 3008
           workingDir: /app   
           env:
             - name: PORT
-              value: "3004"
+              value: "3008"
             - name: MONGO_URI
               value: mongodb://admin:admin@mongo-service:27017
           command: ["npm", "run", "start" ]

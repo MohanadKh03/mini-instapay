@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: user-service-stg-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: user-stg-service
