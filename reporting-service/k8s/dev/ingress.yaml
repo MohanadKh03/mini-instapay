@@ -15,4 +15,4 @@ spec:
             service:
               name: reporting-dev-service
               port: 
-                number: 140
+                number: 80

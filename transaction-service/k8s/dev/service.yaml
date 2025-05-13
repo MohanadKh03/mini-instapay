@@ -6,5 +6,5 @@ spec:
   selector:
     app: transaction-dev-service
   ports:
-    - port: 110
+    - port: 80
       targetPort: 3002

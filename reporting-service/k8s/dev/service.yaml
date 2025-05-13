@@ -6,5 +6,5 @@ spec:
   selector:
     app: reporting-dev-service
   ports:
-    - port: 140
+    - port: 80
       targetPort: 3003

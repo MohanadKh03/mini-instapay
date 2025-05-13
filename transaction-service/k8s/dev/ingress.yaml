@@ -15,4 +15,4 @@ spec:
             service:
               name: transaction-dev-service
               port: 
-                number: 110
+                number: 80
