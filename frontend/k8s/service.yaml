@@ -1,12 +1,11 @@
-# frontend-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: instapay-frontend
 spec:
   selector:
     app: instapay-frontend
   ports:
-  - port: 80
-    targetPort: 80
-
+    - protocol: TCP
+      port: 80
+      targetPort: 80
