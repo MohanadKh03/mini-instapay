@@ -7,6 +7,10 @@ import { sendUnifiedResponse } from '../utils/response';
 export async function register(req: Request, res: Response, next: NextFunction) {
   try {
     const { username, email, password  } = req.body;
+    logger.info("REGISTER")
+    logger.info(`USERNAME: ${username}`);
+    logger.info("EMAIL: ", `${email}`)
+    logger.info("PASSWORD: ", `${password}`)
     const user = await registerUser(username, email, password);
     sendUnifiedResponse(res, 201, 'User registered successfully', { id: user.id, username: user.username, email: user.email, balance: user.balance });
   } catch (error) {
@@ -24,7 +28,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       return sendUnifiedResponse(res, 401, 'Invalid credentials');
 
     const token = generateToken({ id: user.id, username: user.username });
-    sendUnifiedResponse(res, 200, 'Login successful', { token });
+    sendUnifiedResponse(res, 200, 'Login successful', { token, id: user.id });
   } catch (error) {
     logger.error('Error during login', error);
     next(error); 

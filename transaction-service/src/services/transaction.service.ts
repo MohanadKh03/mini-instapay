@@ -58,8 +58,8 @@ export async function makeTransaction(
             throw new Error('Insufficient balance');
         }
 
-        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${senderId}`, { balance: fromUser.balance - amount });
-        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${receiverId}`, { balance: toUser.balance + amount });
+        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${senderId}`, { balance: fromUser.balance - amount as number });
+        await axios.put(`http://${process.env.USER_SVC_NAME}/api/users/update/${receiverId}`, { balance: toUser.balance + amount as number });
         logger.info(`Balances updated successfully for senderId=${senderId} and receiverId=${receiverId}`);
 
         const transaction = await createTransaction(senderId, receiverId, amount);

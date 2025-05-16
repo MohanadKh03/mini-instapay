@@ -1,8 +1,11 @@
 import bcrypt from 'bcryptjs';
 import { User }  from '../models/user.model';
-
+import { logger } from '../utils/logger';
 
 export async function registerUser(username: string, email: string, password: string) {
+
+      logger.info("REGISTER USER BEGIN")
+      logger.info(username, email, password)
   // Check if user already exists
   const existingUser = await User.findOne({ $or: [{ username }, { email }] });
   if (existingUser) {
@@ -10,12 +13,14 @@ export async function registerUser(username: string, email: string, password: st
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  logger.info(hashedPassword)
   const newUser = new User({
     username,
     email,
     password: hashedPassword,
     balance: 0
   });
+  logger.info(newUser.username)
 
   await newUser.save();
   return newUser;

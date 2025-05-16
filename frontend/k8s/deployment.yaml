@@ -1,0 +1,22 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instapay-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instapay-frontend
+  template:
+    metadata:
+      labels:
+        app: instapay-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: mini-instapay-frontend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+
